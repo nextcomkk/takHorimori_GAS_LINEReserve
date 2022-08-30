@@ -17,6 +17,15 @@
 </head>
 
 <body>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PPEK52GV28"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PPEK52GV28');
+</script>
   <div class="form-cover"></div>
   <div class="form-title">
     <!-- <h1>駿府の工房 匠宿 星と森 木育スペースの予約システムです</h1> -->
