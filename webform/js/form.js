@@ -102,84 +102,49 @@ $(function () {
     // ============================
     var events = {};
     function getData(api_url,line_id,token) {
-    // //get api
-    // $.ajax({
-    //   type: 'GET',
-    //   url: api_url,
-    //   data: {
-    //     "act": "new",
-    //     "lineId": line_id,
-    //     "token": token
-    //   },
-    //   dataType: 'JSON',
-    //   cache: false,
-    //   success: function(res){
-    //     if(res){
-    //       var disable = [...Array(31)].map((v, idx) => {
-    //         const dt = new Date()
-    //         dt.setDate(dt.getDate()+idx);
-    //         return (dt.getFullYear() + '-' + ('00' + (dt.getMonth()+1)).slice(-2) + '-' + ('00' + dt.getDate()).slice(-2));
-    //       });
-    //
-    //       for(var i = 0; i<res.length;i++) {
-    //         var key = res[i].eventDate.slice(0,-1).replace('年','-').replace('月','-');
-    //         if (!events[key]) { events[key] = []; }
-    //         if (disable.indexOf(key) !== -1) {
-    //           disable.splice(disable.indexOf(key), 1);
-    //         }
-    //         events[key].push(res[i]);
-    //       }
-    //       $('#reservation-date').flatpickr(config(disable));
-    //
-    //       // apiを読み込んだら表示
-    //       $('.submit-button').show();
-    //
-    //     }else{
-    //       alert("送信できませんでした");
-    //     }
-    //     hideloading();
-    //   },
-    //   error: function (XMLHttpRequest, textStatus, errorThrown) {
-    //     console.log(XMLHttpRequest);
-    //     alert("送信できませんでした");
-    //     hideloading();
-    //   }
-    // });
-
-      var res = [
-        {
-          eventDate: "2022年08月31日",
-          eventId: 1,
-          calId: 1,
-          eventName: "イベント",
-          eventTime: "10:00",
-          seats: 1,
-          memo: "memomo",
+    //get api
+      $.ajax({
+        type: 'GET',
+        url: api_url,
+        data: {
+          "act": "new",
+          "lineId": line_id,
+          "token": token
         },
-        {
-          eventDate: "2022年09月02日",
-          eventId: 2,
-          calId: 2,
-          eventName: "イベント2",
-          eventTime: "12:00",
-          seats: 2,
-          memo: "memomo2",
+        dataType: 'JSON',
+        cache: false,
+        success: function(res){
+          if(res){
+            var disable = [...Array(31)].map((v, idx) => {
+              const dt = new Date()
+              dt.setDate(dt.getDate()+idx);
+              return (dt.getFullYear() + '-' + ('00' + (dt.getMonth()+1)).slice(-2) + '-' + ('00' + dt.getDate()).slice(-2));
+            });
+
+            for(var i = 0; i<res.length;i++) {
+              var key = res[i].eventDate.slice(0,-1).replace('年','-').replace('月','-');
+              if (!events[key]) { events[key] = []; }
+              if (disable.indexOf(key) !== -1) {
+                disable.splice(disable.indexOf(key), 1);
+              }
+              events[key].push(res[i]);
+            }
+            $('#reservation-date').flatpickr(config(disable));
+
+            // apiを読み込んだら表示
+            $('.submit-button').show();
+
+          }else{
+            alert("送信できませんでした");
+          }
+          hideloading();
+        },
+        error: function (XMLHttpRequest, textStatus, errorThrown) {
+          console.log(XMLHttpRequest);
+          alert("送信できませんでした");
+          hideloading();
         }
-      ];
-      var disable = [...Array(31)].map((v, idx) => {
-        const dt = new Date()
-        dt.setDate(dt.getDate()+idx);
-        return (dt.getFullYear() + '-' + ('00' + (dt.getMonth()+1)).slice(-2) + '-' + ('00' + dt.getDate()).slice(-2));
       });
-      for(var i = 0; i<res.length;i++) {
-        var key = res[i].eventDate.slice(0,-1).replace('年','-').replace('月','-');
-        if (!events[key]) { events[key] = []; }
-        if (disable.indexOf(key) !== -1) {
-          disable.splice(disable.indexOf(key), 1);
-        }
-        events[key].push(res[i]);
-      }
-      $('#reservation-date').flatpickr(config(disable));
     }
 
     function createGenre() {
