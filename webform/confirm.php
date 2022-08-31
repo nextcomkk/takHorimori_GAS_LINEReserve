@@ -94,7 +94,7 @@ function h($s) {
       </div>
       <div class="form-controller">
         <label>
-        <b>連絡先tel:</b>
+        <b>連絡先:</b>
         </label>
         <div class="form-group con-div">
           <?= h($tel) ?>

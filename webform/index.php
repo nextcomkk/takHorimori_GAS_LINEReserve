@@ -196,7 +196,7 @@ function h($s) {
 
       <div class="form-controller contact">
         <label>
-          連絡先(携帯電話またはメールアドレス)
+          連絡先(携帯電話)
           <span class="tag tag-danger">必須</span>
         </label>
         <div class="form-group contact">
