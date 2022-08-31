@@ -153,13 +153,15 @@ var cjSetup = function(info){
 //   config_load = true;
 // });
 
-c.flatpickr1 = cjSetup({
-  // minDate: "today",
-  "holiday": [],
-  "disable_date": [],
-  "after_days": 0,
-  "is_range_days": true,
-  "range_days" : 60
-});
+function config(disable) {
+  if (!disable) disable = [];
+  return cjSetup({
+    "holiday": [],
+    "disable_date": disable,
+    "after_days": 0,
+    "is_range_days": true,
+    "range_days" : 30
+  });
+}
 // =====================================
 

@@ -80,7 +80,7 @@ function h($s) {
   gtag('js', new Date());
 
   gtag('config', 'G-PPEK52GV28');
-</script>  
+</script>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -92,8 +92,8 @@ function h($s) {
   <meta property="og:type" content="article">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-  <link rel="stylesheet" href="./css/base.css?v=0.2">
-  <link rel="stylesheet" href="./css/form.css?v=0.24">
+  <link rel="stylesheet" href="./css/base.css?v=<?= filemtime('css/base.css'); ?>">
+  <link rel="stylesheet" href="./css/form.css?v=<?= filemtime('css/form.css'); ?>">
 
   <script>
     var genre_id = "<?= h($input['genre']) ?>";
@@ -249,6 +249,6 @@ function h($s) {
 <script src="./js/vendor/holiday_jp.min.js"></script>
 <script src="./js/jquery.cookie.js"></script>
 <script charset="utf-8" src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
-<script src="./js/config.js?v=0.3"></script>
-<script src="./js/form.js?v=1.2"></script>
+<script src="./js/config.js?v=<?= filemtime('js/config.js'); ?>"></script>
+<script src="./js/form.js?v=<?= filemtime('js/form.js'); ?>"></script>
 </html>

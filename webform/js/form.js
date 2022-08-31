@@ -22,9 +22,6 @@ $(function () {
       $("#contact").val($.cookie('GAS_Reserve_GoogleCal_WebForm_Contact'));
     }
 
-    $('#reservation-date').flatpickr(c['flatpickr1']);
-    // $('#reservation-date').flatpickr();
-
     var api_url = data.api_url;
     var token = data.token;
     var line_id = $("#line_id").val();
@@ -99,79 +96,141 @@ $(function () {
     // reservation date
     onChange("#reservation-date", function () {
       v.reservationDate();
+      createGenre()
     });
 
     // ============================
-
+    var events = {};
     function getData(api_url,line_id,token) {
-    //get api
-    $.ajax({
-      type: 'GET',
-      url: api_url,
-      data: {
-        "act": "new",
-        "lineId": line_id,
-        "token": token
-      },
-      dataType: 'JSON',
-      cache: false,
-      success: function(res){
-        if(res){
-          for(var i = 0; i<res.length;i++){
-            var eventDate = res[i].eventDate;
-            eventDate = eventDate.slice(0,-1);
-            eventDate = eventDate.replace('年','/').replace('月','/');
-            var day = new Date(Date.parse(eventDate));
-            var week = today[day.getDay()];
-            var memo = res[i].memo.slice(0,-1);
+    // //get api
+    // $.ajax({
+    //   type: 'GET',
+    //   url: api_url,
+    //   data: {
+    //     "act": "new",
+    //     "lineId": line_id,
+    //     "token": token
+    //   },
+    //   dataType: 'JSON',
+    //   cache: false,
+    //   success: function(res){
+    //     if(res){
+    //       var disable = [...Array(31)].map((v, idx) => {
+    //         const dt = new Date()
+    //         dt.setDate(dt.getDate()+idx);
+    //         return (dt.getFullYear() + '-' + ('00' + (dt.getMonth()+1)).slice(-2) + '-' + ('00' + dt.getDate()).slice(-2));
+    //       });
+    //
+    //       for(var i = 0; i<res.length;i++) {
+    //         var key = res[i].eventDate.slice(0,-1).replace('年','-').replace('月','-');
+    //         if (!events[key]) { events[key] = []; }
+    //         if (disable.indexOf(key) !== -1) {
+    //           disable.splice(disable.indexOf(key), 1);
+    //         }
+    //         events[key].push(res[i]);
+    //       }
+    //       $('#reservation-date').flatpickr(config(disable));
+    //
+    //       // apiを読み込んだら表示
+    //       $('.submit-button').show();
+    //
+    //     }else{
+    //       alert("送信できませんでした");
+    //     }
+    //     hideloading();
+    //   },
+    //   error: function (XMLHttpRequest, textStatus, errorThrown) {
+    //     console.log(XMLHttpRequest);
+    //     alert("送信できませんでした");
+    //     hideloading();
+    //   }
+    // });
 
-            //1ヶ月先まで表示
-            var dt = new Date();
-            if(day>dt.setMonth(dt.getMonth()+1)) break;
-
-            if(res[i].eventId == genre_id && res[i].calId == cal_id && res[i].eventName == event_name && res[i].eventId == event_id
-              && res[i].eventDate == event_date && res[i].eventTime == event_time && res[i].seats == seats && memo == return_memo){
-              checked_flg = "checked";
-            }else{
-              checked_flg = "";
-            }
-            var str = "<label class='select-button form-radio-field form-control-success form-control-danger'><div style='width: 100%;'>";
-            str += "<span class='radio-button'><input type='radio' name='genre' id='genre"+i+"' value='"+res[i].eventId+"' class='form-control-success' "+checked_flg+"></span>";
-            str += "<span class='radio-text'>"+eventDate+"("+week+") "+res[i].eventTime+" "+res[i].eventName+"</span>";
-            str += "<input type='hidden' name='calId"+i+"' id='calId"+i+"' value='"+res[i].calId+"'>";
-            str += "<input type='hidden' name='eventName"+i+"' id='eventName"+i+"' value='"+res[i].eventName+"'>";
-            str += "<input type='hidden' name='eventId"+i+"'id='eventId"+i+"' value='"+res[i].eventId+"'>";
-            str += "<input type='hidden' name='eventDate"+i+"'id='eventDate"+i+"' value='"+res[i].eventDate+"'>";
-            str += "<input type='hidden' name='eventTime"+i+"'id='eventTime"+i+"' value='"+res[i].eventTime+"'>";
-            str += "<input type='hidden' name='seats"+i+"'id='seats"+i+"' value='"+res[i].seats+"'>";
-            str += "<input type='hidden' name='memo"+i+"'id='memo"+i+"' value='"+memo+"'>";
-            str += "<input type='hidden' name='radio_date"+i+"'id='radio_date"+i+"' value='"+eventDate+"("+week+") "+res[i].eventTime+"'></div>";
-            str += "<div style='width: 100%;margin-right: 10%;text-align: right;'><span class='radio-text'>残り："+res[i].seats+"枠</span></div>";
-            str += "</label></div>";
-            $("#add_genre").append(str);
-          }
-          // apiを読み込んだら表示
-          $('.submit-button').show();
-
-          onClick("input[type='radio']", function (e) {
-            var genre_id = $(this).attr("id").replace('genre','');
-            $("[name='genre_id']").val(genre_id);
-            v.genre();
-            if (getValue('#number-of-child')) {
-              v.numberOf();
-            }
-          });
-        }else{
-          alert("送信できませんでした");
+      var res = [
+        {
+          eventDate: "2022年08月31日",
+          eventId: 1,
+          calId: 1,
+          eventName: "イベント",
+          eventTime: "10:00",
+          seats: 1,
+          memo: "memomo",
+        },
+        {
+          eventDate: "2022年09月02日",
+          eventId: 2,
+          calId: 2,
+          eventName: "イベント2",
+          eventTime: "12:00",
+          seats: 2,
+          memo: "memomo2",
         }
-        hideloading();
-      },
-      error: function (XMLHttpRequest, textStatus, errorThrown) {
-        console.log(XMLHttpRequest);
-        alert("送信できませんでした");
-        hideloading();
+      ];
+      var disable = [...Array(31)].map((v, idx) => {
+        const dt = new Date()
+        dt.setDate(dt.getDate()+idx);
+        return (dt.getFullYear() + '-' + ('00' + (dt.getMonth()+1)).slice(-2) + '-' + ('00' + dt.getDate()).slice(-2));
+      });
+      for(var i = 0; i<res.length;i++) {
+        var key = res[i].eventDate.slice(0,-1).replace('年','-').replace('月','-');
+        if (!events[key]) { events[key] = []; }
+        if (disable.indexOf(key) !== -1) {
+          disable.splice(disable.indexOf(key), 1);
+        }
+        events[key].push(res[i]);
       }
-    });
+      $('#reservation-date').flatpickr(config(disable));
+    }
+
+    function createGenre() {
+      $("#add_genre label").remove();
+      var res = events[getValue("#reservation-date")];
+      if (res) {
+        for(var i = 0; i<res.length;i++){
+          var eventDate = res[i].eventDate;
+          eventDate = eventDate.slice(0,-1);
+          eventDate = eventDate.replace('年','/').replace('月','/');
+          var day = new Date(Date.parse(eventDate));
+          var week = today[day.getDay()];
+          var memo = res[i].memo.slice(0,-1);
+
+          //1ヶ月先まで表示
+          var dt = new Date();
+          if(day>dt.setMonth(dt.getMonth()+1)) break;
+
+          if(res[i].eventId == genre_id && res[i].calId == cal_id && res[i].eventName == event_name && res[i].eventId == event_id
+            && res[i].eventDate == event_date && res[i].eventTime == event_time && res[i].seats == seats && memo == return_memo){
+            checked_flg = "checked";
+          }else{
+            checked_flg = "";
+          }
+          var str = "<label class='select-button form-radio-field form-control-success form-control-danger'><div style='width: 100%;'>";
+          str += "<span class='radio-button'><input type='radio' name='genre' id='genre"+i+"' value='"+res[i].eventId+"' class='form-control-success' "+checked_flg+"></span>";
+          // str += "<span class='radio-text'>"+eventDate+"("+week+") "+res[i].eventTime+" "+res[i].eventName+"</span>";
+          str += "<span class='radio-text'>"+res[i].eventTime+" "+res[i].eventName+"</span>";
+          str += "<input type='hidden' name='calId"+i+"' id='calId"+i+"' value='"+res[i].calId+"'>";
+          str += "<input type='hidden' name='eventName"+i+"' id='eventName"+i+"' value='"+res[i].eventName+"'>";
+          str += "<input type='hidden' name='eventId"+i+"'id='eventId"+i+"' value='"+res[i].eventId+"'>";
+          str += "<input type='hidden' name='eventDate"+i+"'id='eventDate"+i+"' value='"+res[i].eventDate+"'>";
+          str += "<input type='hidden' name='eventTime"+i+"'id='eventTime"+i+"' value='"+res[i].eventTime+"'>";
+          str += "<input type='hidden' name='seats"+i+"'id='seats"+i+"' value='"+res[i].seats+"'>";
+          str += "<input type='hidden' name='memo"+i+"'id='memo"+i+"' value='"+memo+"'>";
+          str += "<input type='hidden' name='radio_date"+i+"'id='radio_date"+i+"' value='"+eventDate+"("+week+") "+res[i].eventTime+"'></div>";
+          str += "<div style='width: 100%;margin-right: 10%;text-align: right;'><span class='radio-text'>残り："+res[i].seats+"枠</span></div>";
+          str += "</label>";
+          $(str).appendTo("#add_genre").hide().fadeIn();
+        }
+
+        onClick("input[type='radio']", function (e) {
+          var genre_id = $(this).attr("id").replace('genre','');
+          $("[name='genre_id']").val(genre_id);
+          v.genre();
+          if (getValue('#number-of-child')) {
+            v.numberOf();
+          }
+        });
+      }
+
     }
 
     // process each time "keyup" event occurs
