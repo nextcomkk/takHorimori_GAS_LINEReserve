@@ -90,7 +90,9 @@ function h($s) {
   <meta property="og:title" content="予約システム｜駿府の工房 匠宿 星と森 木育スペース">
   <meta property="og:description" content="駿府の工房 匠宿 星と森 木育スペースの予約システムです">
   <meta property="og:type" content="article">
-  <meta property="og:url" content="https://takhoshitomorilinereserve.azurewebsites.net/webform/img/form-cover.jpg" />
+  <meta property="og:url" content="https://takhoshitomorilinereserve.azurewebsites.net/webform/" />
+  <meta property="og:image" content="https://takhoshitomorilinereserve.azurewebsites.net/webform/img/form-cover.jpg" />
+  <meta property="og:site_name" content="駿府の工房 匠宿 星と森">  
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="./css/base.css?v=<?= filemtime('css/base.css'); ?>">
