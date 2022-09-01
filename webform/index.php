@@ -202,7 +202,7 @@ function h($s) {
           <span class="tag tag-danger">必須</span>
         </label>
         <div class="form-group contact">
-          <input type="text" name="contact" id="contact" value="<?= h($input['contact']) ?>" placeholder="09012345678 または you@example.com" class="form-control form-control-success form-control-danger">
+          <input type="text" name="contact" id="contact" value="<?= h($input['contact']) ?>" placeholder="09012345678" class="form-control form-control-success form-control-danger">
           <p class="text-danger error">有効な連絡先を入力してください</p>
         </div>
       </div>

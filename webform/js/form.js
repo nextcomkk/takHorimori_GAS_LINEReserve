@@ -35,14 +35,36 @@ $(function () {
       .then(() => {
           if (liff.isLoggedIn()) {
             liff.getProfile()
-              .then(profile => {
-                if (getValue("#contact") == ""){
+              .then(async profile => {
+                if (getValue("#contact") == "") {
                   $("#user-name").val(profile.displayName);
                   v.userName();
                 }
                 $("#line_id").val(profile.userId);
                 var line_id = $("#line_id").val();
-                getData(api_url,line_id,token);
+                if (line_id) {
+                  await fetch(data.member_base_url + data.member_api + line_id, {
+                    mode: "cors",
+                    headers: { 'Authorization': data.member_api_token }
+                  })
+                    .then(function (res) {
+                      if(res.ok) {
+                        return res.json();
+                      } else {
+                        throw new Error();
+                      }
+                    }).then(function (json) {
+                      if (getValue("#user-name") === "") {
+                        $("#user-name").val(json['member_lastname'] + " " + json['member_firstname']);
+                        $("#contact").val(json['member_tel']);
+                        v.userName();
+                      }
+                    }).catch(err => {
+                      console.log(err);
+                    });
+                }
+
+                getData(api_url, line_id, token);
               })
             }
           else{
@@ -122,6 +144,7 @@ $(function () {
             });
 
             for(var i = 0; i<res.length;i++) {
+              if (!res[i].eventDate) continue;
               var key = res[i].eventDate.slice(0,-1).replace('年','-').replace('月','-');
               if (!events[key]) { events[key] = []; }
               if (disable.indexOf(key) !== -1) {

@@ -3,9 +3,12 @@ session_start();
 
 $line_id = $_SESSION['line_id'];
 $genre = $_SESSION['genre'];
+$number_of_child = $_SESSION['number-of-child'];
+$number_of_under2 = $_SESSION['number-of-under2'];
+$number_of_guardian = $_SESSION['number-of-guardian'];
 $user_name = $_SESSION['user-name'];
 $radio_date = $_SESSION['radio-date'];
-$tel = $_SESSION['tel'];
+$contact = $_SESSION['contact'];
 $remarks = $_SESSION['remarks'];
 $cal_id = $_SESSION['cal-id'];
 $event_name = $_SESSION['event-name'];
@@ -20,9 +23,12 @@ try {
     $log_data = <<<EOD
     [line_id]：{$line_id}
     [radio]：{$genre}
+    [子供]：{$number_of_child}
+    [2歳以下]：{$number_of_under2}
+    [保護者]：{$number_of_guardian}
     [名前]：{$user_name}
     [日程選択]：{$radio_date}
-    [連絡先TEL]：{$tel}
+    [連絡先]：{$contact}
     [備考]：{$remarks}
     [cal_id]：{$cal_id}
     [event_name]：{$event_name}
@@ -58,23 +64,14 @@ try {
 <html lang="ja">
 
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-PPEK52GV28"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-PPEK52GV28');
-</script>  
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>予約完了｜駿府の工房 匠宿 星と森 木育スペース</title>
-  <meta name="description" content="駿府の工房 匠宿 星と森 木育スペースの予約システムです">
+  <title>予約完了</title>
+  <meta name="description" content="これは予約システムのデモサイトです">
   <meta name="robots" content="nofollow">
-  <meta property="og:title" content="予約完了｜駿府の工房 匠宿 星と森 木育スペース">
-  <meta property="og:description" content="駿府の工房 匠宿 星と森 木育スペースの予約システムです">
+  <meta property="og:title" content="予約完了">
+  <meta property="og:description" content="これは予約システムのデモサイトです">
   <meta property="og:type" content="article">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="css/base.css">
@@ -84,7 +81,7 @@ try {
 <body>
   <div class="form-cover"></div>
   <div class="form-title">
-    <!-- <h1>駿府の工房 匠宿 星と森 木育スペースの予約システムです</h1> -->
+    <!-- <h1>これは予約システムのデモサイトです</h1> -->
     <p>予約が完了しました</p>
   </div>
   <div class="thanks-wrapper form-wrapper">

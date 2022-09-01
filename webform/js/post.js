@@ -13,8 +13,11 @@ $(function () {
             e.preventDefault();
             var line_id = $("#line_id").val();
             var genre = $("#genre").val();
+            var num = $("#number_of_child").val();
+            var num1 = $("#number_of_under2").val();
+            var num2 = $("#number_of_guardian").val();
             var user_name = $("#user_name").val();
-            var tel = $("#tel").val();
+            var contact = $("#contact").val();
             var remarks = $("#remarks").val();
             var cal_id = $("#cal_id").val();
             var event_name = $("#event_name").val();
@@ -37,9 +40,11 @@ $(function () {
                 "eventId": event_id,
                 "eventDate": event_date,
                 "eventTime": event_time,
-                "num":1,
+                "num": num,
+                "num1": num1,
+                "num2": num2,
                 "name" : user_name,
-                "tel": tel,
+                "tel": contact,
                 "memo": remarks
             };
 
@@ -98,7 +103,7 @@ $(function () {
             //     cache: false,
             //     async: true,
             //     success: function(res){
-            //         console.log(res); 
+            //         console.log(res);
             //         $('form').submit();
             //     },
             //     error: function (XMLHttpRequest, textStatus, errorThrown) {
