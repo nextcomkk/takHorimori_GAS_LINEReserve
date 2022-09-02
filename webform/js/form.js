@@ -56,8 +56,12 @@ $(function () {
                     }).then(function (json) {
                       if (getValue("#user-name") === "") {
                         $("#user-name").val(json['member_lastname'] + " " + json['member_firstname']);
-                        $("#contact").val(json['member_tel']);
                         v.userName();
+
+                        if (json['member_tel']) {
+                          $("#contact").val(json['member_tel']);
+                          v.contact();
+                        }
                       }
                     }).catch(err => {
                       console.log(err);
@@ -397,6 +401,11 @@ $(function () {
         }
 
         if (child) {
+          if (child === '0') {
+            validate(false, $fg.filter('.number-of-child'));
+            $fg.filter('.form-group.number-of-child').find(".error").text('1名以上で入力してください');
+            return;
+          }
           var id = getValue('[name=genre_id]');
           if (id) {
             validate((Number(getValue(`#seats${id}`) || 0) >= Number(child)), $fg.filter('.number-of-child'));
@@ -408,7 +417,7 @@ $(function () {
           var check = (Number(child) / 2 <= Number(guardian));
           validate(check, $fg.filter('.number-of-guardian'));
           $fg.filter('.form-group.number-of-guardian').find(".error").text('保護者1名につきお子様の人数は2名までです');
-          if (!check) {
+          if (check) {
             var check2 = (Number(child) * 2 >= Number(guardian));
             if (!check2) {
               validate(check2, $fg.filter('.number-of-guardian'));

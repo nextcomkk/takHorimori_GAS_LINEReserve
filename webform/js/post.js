@@ -57,7 +57,11 @@ $(function () {
 
             const promise = fetch(URL, postparam);
             promise.then(function(response) {
-                console.log(response);
+                return response.json();
+            }).then(function(data) {
+                console.log(data);
+                $("#res_status").val(data['status']);
+                $("#res_message").val(data['message']);
                 $('form').submit();
             });
 

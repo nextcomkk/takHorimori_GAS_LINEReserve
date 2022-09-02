@@ -91,7 +91,7 @@ function h($s) {
       </div>
       <div class="form-controller">
         <label>
-          <b>うち2歳未満(0~1歳)のお子様の人数:</b>
+          <b>うち2歳未満の人数:</b>
         </label>
         <div class="form-group con-div">
             <?= h($number_of_under2) ?>
@@ -126,7 +126,7 @@ function h($s) {
         <b>備考:</b>
         </label>
         <div class="form-group con-div">
-            <?= nl2br($remarks) ?>
+            <?= h($remarks) ?>
         </div>
       </div>
       <input type='hidden' name='line_id' id='line_id' value="<?= h($line_id) ?>">
@@ -145,6 +145,8 @@ function h($s) {
       <input type='hidden' name='seats' id='seats' value="<?= h($seats) ?>">
       <input type='hidden' name='memo' id='memo' value="<?= h($memo) ?>">
       <input type="hidden" name="token" id="token"  value="<?= $csrf_token ?>">
+      <input type="hidden" name="res_status" id="res_status"">
+      <input type="hidden" name="res_message" id="res_message">
       <div class="submit-button-s col-xs-3 mb-3" style="padding-left: 0px;">
         <input type="button" value="戻る">
       </div>

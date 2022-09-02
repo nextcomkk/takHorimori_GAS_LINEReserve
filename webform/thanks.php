@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+$res_status = filter_input(INPUT_POST, 'res_status');
+$res_message = filter_input(INPUT_POST, 'res_message');
+
 $line_id = $_SESSION['line_id'];
 $genre = $_SESSION['genre'];
 $number_of_child = $_SESSION['number-of-child'];
@@ -82,11 +85,11 @@ try {
   <div class="form-cover"></div>
   <div class="form-title">
     <!-- <h1>これは予約システムのデモサイトです</h1> -->
-    <p>予約が完了しました</p>
+    <p><?= htmlspecialchars($res_message, ENT_QUOTES, "UTF-8") ?></p>
   </div>
   <div class="thanks-wrapper form-wrapper">
-    <div class="img-checked"><img src="img/check.svg" alt="checked" height="30" width="30"></div>
-    <p class="title">送信完了</p>
+    <div class="img-checked"><img src="img/<?=$res_status?>.svg" alt="checked" height="30" width="30"></div>
+    <!-- <p class="title"><?= htmlspecialchars($res_message, ENT_QUOTES, "UTF-8") ?></p> -->
   </div>
 </body>
 
