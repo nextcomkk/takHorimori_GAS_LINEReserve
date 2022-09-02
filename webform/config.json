@@ -3,7 +3,7 @@
   "token": "abcdefghijklmnopqrstuvwxyz",
   "liffId": "1657420852-OpEa0vLQ",
 
-  "member_base_url": "https://line.takumishuku.com",
+  "member_base_url": "https://taklinememberscard-core.azurewebsites.net",
   "member_api": "/api/v1/member/createFind/",
   "member_api_token": "BtYJvqFVAaenQETxkvyY"
 }
