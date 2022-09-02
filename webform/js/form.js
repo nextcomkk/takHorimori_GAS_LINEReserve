@@ -66,10 +66,10 @@ $(function () {
 
                 getData(api_url, line_id, token);
               })
-            }
+          }
           else{
             hideloading();
-            liff.login();
+            // liff.login();
           }
       })
       .catch((err) => {
@@ -409,8 +409,11 @@ $(function () {
           validate(check, $fg.filter('.number-of-guardian'));
           $fg.filter('.form-group.number-of-guardian').find(".error").text('保護者1名につきお子様の人数は2名までです');
           if (!check) {
-            validate((Number(child) * 2 >= Number(guardian)), $fg.filter('.number-of-guardian'));
-            $fg.filter('.form-group.number-of-guardian').find(".error").text('保護者の人数はお子様1名につき2名までです');
+            var check2 = (Number(child) * 2 >= Number(guardian));
+            if (!check2) {
+              validate(check2, $fg.filter('.number-of-guardian'));
+              $fg.filter('.form-group.number-of-guardian').find(".error").text('保護者の人数はお子様1名につき2名までです');
+            }
           }
         }
 
@@ -434,7 +437,6 @@ $(function () {
     if (has_session) {
       v.validateFirst();
     }
-
 
   });
 });

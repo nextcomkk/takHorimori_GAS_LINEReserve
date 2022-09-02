@@ -115,7 +115,7 @@ function h($s) {
       </div>
       <div class="form-controller">
         <label>
-        <b>連絡先(携帯電話またはメールアドレス):</b>
+        <b>連絡先(携帯電話):</b>
         </label>
         <div class="form-group con-div">
           <?= h($contact) ?>
@@ -145,10 +145,10 @@ function h($s) {
       <input type='hidden' name='seats' id='seats' value="<?= h($seats) ?>">
       <input type='hidden' name='memo' id='memo' value="<?= h($memo) ?>">
       <input type="hidden" name="token" id="token"  value="<?= $csrf_token ?>">
-      <div class="submit-button-s col-xs-3" style="padding-left: 0px;">
+      <div class="submit-button-s col-xs-3 mb-3" style="padding-left: 0px;">
         <input type="button" value="戻る">
       </div>
-      <div class="submit-button-s col-xs-6">
+      <div class="submit-button-s col-xs-6 mb-3">
         <input type="submit" value="送信する" onClick="javascript:double(this)">
       </div>
     </form>
