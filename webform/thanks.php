@@ -1,9 +1,6 @@
 <?php
 session_start();
 
-$res_status = filter_input(INPUT_POST, 'res_status');
-$res_message = filter_input(INPUT_POST, 'res_message');
-
 $line_id = $_SESSION['line_id'];
 $genre = $_SESSION['genre'];
 $number_of_child = $_SESSION['number-of-child'];
@@ -67,14 +64,23 @@ try {
 <html lang="ja">
 
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PPEK52GV28"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PPEK52GV28');
+</script>  
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>予約完了</title>
-  <meta name="description" content="これは予約システムのデモサイトです">
+  <title>予約完了｜駿府の工房 匠宿 星と森 木育スペース</title>
+  <meta name="description" content="駿府の工房 匠宿 星と森 木育スペースの予約システムです">
   <meta name="robots" content="nofollow">
-  <meta property="og:title" content="予約完了">
-  <meta property="og:description" content="これは予約システムのデモサイトです">
+  <meta property="og:title" content="予約完了｜駿府の工房 匠宿 星と森 木育スペース">
+  <meta property="og:description" content="駿府の工房 匠宿 星と森 木育スペースの予約システムです">
   <meta property="og:type" content="article">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="css/base.css">
@@ -84,12 +90,12 @@ try {
 <body>
   <div class="form-cover"></div>
   <div class="form-title">
-    <!-- <h1>これは予約システムのデモサイトです</h1> -->
-    <p><?= htmlspecialchars($res_message, ENT_QUOTES, "UTF-8") ?></p>
+    <!-- <h1>駿府の工房 匠宿 星と森 木育スペースの予約システムです</h1> -->
+    <p>予約が完了しました</p>
   </div>
   <div class="thanks-wrapper form-wrapper">
-    <div class="img-checked"><img src="img/<?=$res_status?>.svg" alt="checked" height="30" width="30"></div>
-    <!-- <p class="title"><?= htmlspecialchars($res_message, ENT_QUOTES, "UTF-8") ?></p> -->
+    <div class="img-checked"><img src="img/check.svg" alt="checked" height="30" width="30"></div>
+    <p class="title">送信完了</p>
   </div>
 </body>
 
