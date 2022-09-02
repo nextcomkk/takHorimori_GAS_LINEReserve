@@ -51,14 +51,23 @@ function h($s) {
 <html lang="ja">
 
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PPEK52GV28"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-PPEK52GV28');
+</script>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>予約システム</title>
-  <meta name="description" content="これは予約システムのデモサイトです">
+  <title>予約システム｜駿府の工房 匠宿 星と森 木育スペース</title>
+  <meta name="description" content="駿府の工房 匠宿 星と森 木育スペースの予約システムです">
   <meta name="robots" content="nofollow">
-  <meta property="og:title" content="予約システム">
-  <meta property="og:description" content="これは予約システムのデモサイトです">
+  <meta property="og:title" content="駿府の工房 匠宿 星と森 木育スペースの予約システム">
+  <meta property="og:description" content="駿府の工房 匠宿 星と森 木育スペースの予約システムです">
   <meta property="og:type" content="article">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="./css/base.css">
