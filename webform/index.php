@@ -220,7 +220,7 @@ function h($s) {
       <div class="form-controller agreement">
         <!-- <p><a href="./riyoukiyaku_hoshitomori.pdf" target="_blank">利用規約</a>を確認の上チェックしてください</p> -->
         <label>
-          <a href="./riyoukiyaku_hoshitomori.pdf" target="_blank">利用規約</a>を確認の上チェックしてください
+          <a href="https://takumishuku.xsrv.jp/riyoukiyaku_hoshitomori.pdf" target="_blank">利用規約</a>を確認の上チェックしてください
           <span class="tag tag-danger">必須</span>
         </label>
         <div class="form-group agreement">

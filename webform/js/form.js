@@ -73,7 +73,7 @@ $(function () {
           }
           else{
             hideloading();
-            // liff.login();
+            liff.login();
           }
       })
       .catch((err) => {
@@ -414,6 +414,10 @@ $(function () {
         }
 
         if (child && guardian) {
+          if (guardian === '0') {
+            validate(false, $fg.filter('.number-of-guardian'));
+            $fg.filter('.form-group.number-of-guardian').find(".error").text('1名以上で入力してください');
+          }
           var check = (Number(child) / 2 <= Number(guardian));
           validate(check, $fg.filter('.number-of-guardian'));
           $fg.filter('.form-group.number-of-guardian').find(".error").text('保護者1名につきお子様の人数は2名までです');
