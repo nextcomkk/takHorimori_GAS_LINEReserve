@@ -50,7 +50,7 @@ $(function () {
 
             var postparam = {
                 "method"     : "POST",
-                "mode"       : "no-cors",
+                "mode"       : "cors",
                 "Content-Type" : "application/x-www-form-urlencoded",
                 "body" : JSON.stringify(SendDATA)
             };
@@ -58,6 +58,11 @@ $(function () {
             const promise = fetch(URL, postparam);
             promise.then(function(response) {
                 console.log(response);
+                return response.json();
+            }).then(function(data) {
+                console.log(data);
+                $("#res_status").val(data['status']);
+                $("#res_message").val(data['message']);
                 $('form').submit();
             });
 

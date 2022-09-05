@@ -54,14 +54,13 @@ $(function () {
                         throw new Error();
                       }
                     }).then(function (json) {
-                      if (getValue("#user-name") === "") {
+                      if (json['member_lastname'] === "") {
                         $("#user-name").val(json['member_lastname'] + " " + json['member_firstname']);
                         v.userName();
-
-                        if (json['member_tel']) {
-                          $("#contact").val(json['member_tel']);
-                          v.contact();
-                        }
+                      }
+                      if (json['member_tel']) {
+                        $("#contact").val(json['member_tel']);
+                        v.contact();
                       }
                     }).catch(err => {
                       console.log(err);
@@ -157,6 +156,11 @@ $(function () {
               events[key].push(res[i]);
             }
             $('#reservation-date').flatpickr(config(disable));
+
+            if (getValue("#reservation-date") !== "" && genre_id){
+              $('#reservation-date').change();
+              $('input[type=radio]:checked').click();
+            }
 
             // apiを読み込んだら表示
             $('.submit-button').show();
@@ -397,7 +401,6 @@ $(function () {
           $fg.filter('.form-group.number-of-guardian').find(".error").text('入力してください');
           validate(m.isRequired(under2), $fg.filter('.number-of-under2'));
           $fg.filter('.form-group.number-of-under2').find(".error").text('入力してください');
-          if (!child || !guardian || !under2) return;
         }
 
         if (child) {
@@ -414,11 +417,6 @@ $(function () {
         }
 
         if (child && guardian) {
-          if (guardian === '0') {
-            validate(false, $fg.filter('.number-of-guardian'));
-            $fg.filter('.form-group.number-of-guardian').find(".error").text('1名以上で入力してください');
-            return;
-          }
           var check = (Number(child) / 2 <= Number(guardian));
           validate(check, $fg.filter('.number-of-guardian'));
           $fg.filter('.form-group.number-of-guardian').find(".error").text('保護者1名につきお子様の人数は2名までです');

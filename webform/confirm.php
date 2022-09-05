@@ -5,6 +5,7 @@ $_SESSION['back'] = true;
 $csrf_token = $_SESSION['token'];
 
 $line_id = filter_input(INPUT_POST, 'line_id');
+$reservation_date = filter_input(INPUT_POST, 'reservation-date');
 $genre = filter_input(INPUT_POST, 'genre');
 $number_of_child = filter_input(INPUT_POST, 'number-of-child');
 $number_of_under2 = filter_input(INPUT_POST, 'number-of-under2');
@@ -24,6 +25,7 @@ $radio_date = filter_input(INPUT_POST, 'radio_date'.$genre_id);
 $agreement = filter_input(INPUT_POST, 'agreement', FILTER_VALIDATE_BOOLEAN);
 
 $_SESSION['line_id'] = $line_id;
+$_SESSION['reservation-date'] = $reservation_date;
 $_SESSION['genre'] = $genre;
 $_SESSION['number-of-child'] = $number_of_child;
 $_SESSION['number-of-under2'] = $number_of_under2;

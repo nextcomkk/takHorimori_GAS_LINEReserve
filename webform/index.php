@@ -9,7 +9,7 @@ $input['line_id'] = isset($myArray["lineid"])? $myArray["lineid"] : '';
 $input['user-name'] = isset($myArray["name"])? $myArray["name"] : '';
 
 if($input['act'] == "check"){
-  header('Location: ./edit.php?lineid='.$input['line_id']);
+  header('Location: ./edit.php');
   die;
 }
 
@@ -92,7 +92,7 @@ function h($s) {
   <meta property="og:type" content="article">
   <meta property="og:url" content="https://takhoshitomorilinereserve.azurewebsites.net/webform/" />
   <meta property="og:image" content="https://takhoshitomorilinereserve.azurewebsites.net/webform/img/form-cover.jpg" />
-  <meta property="og:site_name" content="駿府の工房 匠宿 星と森">  
+  <meta property="og:site_name" content="駿府の工房 匠宿 星と森">
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="./css/base.css?v=<?= filemtime('css/base.css'); ?>">
