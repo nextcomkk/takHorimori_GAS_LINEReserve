@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+$res_status = filter_input(INPUT_POST, 'res_status');
+$res_message = filter_input(INPUT_POST, 'res_message');
+
 $line_id = $_SESSION['line_id'];
 $genre = $_SESSION['genre'];
 $number_of_child = $_SESSION['number-of-child'];
@@ -21,6 +24,7 @@ $memo = $_SESSION['memo'];
 try {
 
     $log_data = <<<EOD
+    [message]：{$res_message}
     [line_id]：{$line_id}
     [radio]：{$genre}
     [子供]：{$number_of_child}
@@ -41,7 +45,8 @@ try {
 
     $log = "./data.log";
     if(file_exists($log)){
-        file_put_contents($log, "==================statr ".date("Y-m-d D h:i:s")."====================\n", FILE_APPEND);
+        date_default_timezone_set('Asia/Tokyo');
+        file_put_contents($log, "==================start ".date("Y-m-d D h:i:s")."====================\n", FILE_APPEND);
         file_put_contents($log, $log_data, FILE_APPEND);
         file_put_contents($log, "==================end ".date("Y-m-d D h:i:s")."======================\n", FILE_APPEND);
     } else {
@@ -90,12 +95,12 @@ try {
 <body>
   <div class="form-cover"></div>
   <div class="form-title">
-    <!-- <h1>駿府の工房 匠宿 星と森 木育スペースの予約システムです</h1> -->
-    <p>予約が完了しました</p>
+    <!-- <h1>これは予約システムのデモサイトです</h1> -->
+    <!-- <p>予約が完了しました</p>-->
+    <p><?= htmlspecialchars($res_message, ENT_QUOTES, "UTF-8") ?></p>
   </div>
   <div class="thanks-wrapper form-wrapper">
-    <div class="img-checked"><img src="img/check.svg" alt="checked" height="30" width="30"></div>
-    <p class="title">送信完了</p>
+    <div class="img-checked"><img src="img/<?=$res_status?>.svg" alt="checked" height="30" width="30"></div>    
   </div>
 </body>
 

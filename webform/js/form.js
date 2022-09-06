@@ -54,7 +54,7 @@ $(function () {
                         throw new Error();
                       }
                     }).then(function (json) {
-                      if (json['member_lastname'] === "") {
+                      if (json['member_lastname']) {
                         $("#user-name").val(json['member_lastname'] + " " + json['member_firstname']);
                         v.userName();
                       }
