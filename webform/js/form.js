@@ -55,7 +55,8 @@ $(function () {
                       }
                     }).then(function (json) {
                       if (json['member_lastname']) {
-                        $("#user-name").val(json['member_lastname'] + " " + json['member_firstname']);
+                        $("#user-name").val(
+                          `${json['member_lastname']}${json['member_firstname']}`.replaceAll('@', ''));
                         v.userName();
                       }
                       if (json['member_tel']) {
