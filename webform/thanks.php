@@ -100,7 +100,7 @@ try {
     <p><?= htmlspecialchars($res_message, ENT_QUOTES, "UTF-8") ?></p>
   </div>
   <div class="thanks-wrapper form-wrapper">
-    <div class="img-checked"><img src="img/<?=$res_status?>.svg" alt="checked" height="30" width="30"></div>    
+    <div class="img-checked"><img src="img/<?=$res_status?>.svg" alt="checked" height="80" width="80"></div>    
   </div>
 </body>
 
