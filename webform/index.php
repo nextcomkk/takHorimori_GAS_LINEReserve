@@ -183,7 +183,7 @@ function h($s) {
 
       <div class="form-controller name">
           <label>
-          お名前
+          お名前(本名※ニックネームでは受付できません)
           <span class="tag tag-danger">必須</span>
           </label>
           <div class="row row-gutter-xs">
