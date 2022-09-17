@@ -172,7 +172,7 @@ function h($s) {
       </div>
       <div class="form-controller number-of-guardian">
         <label>
-          保護者の人数（保護者1名につきお子様の人数は2名まで）
+          保護者の人数(保護者1名につきお子様は2名まで)
           <span class="tag tag-danger">必須</span>
         </label>
         <div class="form-group number-of-guardian">
@@ -183,7 +183,7 @@ function h($s) {
 
       <div class="form-controller name">
           <label>
-          お名前(本名※ニックネームでは受付できません)
+          お名前(本名 ※ニックネーム不可)
           <span class="tag tag-danger">必須</span>
           </label>
           <div class="row row-gutter-xs">
