@@ -39,6 +39,19 @@
   width: 80%;
 }
 
+div.user-name {
+  display: flex;
+  justify-content: space-between;
+}
+div.user-name>.user-lastname {
+  flex: 1;
+  margin-right: .5rem
+}
+div.user-name>.user-firstname {
+  flex: 1;
+  margin-left: .5rem
+}
+
 input[name^='number-of-'] {
   width: calc(100% - 2rem);
   display: inline-block;

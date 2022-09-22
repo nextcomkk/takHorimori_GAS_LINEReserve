@@ -16,7 +16,8 @@ $(function () {
             var num = $("#number_of_child").val();
             var num1 = $("#number_of_under2").val();
             var num2 = $("#number_of_guardian").val();
-            var user_name = $("#user_name").val();
+            var user_lastname = $("#user_lastname").val();
+            var user_firstname = $("#user_firstname").val();
             var contact = $("#contact").val();
             var remarks = $("#remarks").val();
             var cal_id = $("#cal_id").val();
@@ -43,7 +44,7 @@ $(function () {
                 "num": num,
                 "num1": num1,
                 "num2": num2,
-                "name" : user_name,
+                "name" : user_lastname + ' ' + user_firstname,
                 "tel": contact,
                 "memo": remarks
             };

@@ -6,7 +6,14 @@ parse_str($cur_q,$myArray);
 
 $input['act'] = isset($myArray["act"])? $myArray["act"] : '';
 $input['line_id'] = isset($myArray["lineid"])? $myArray["lineid"] : '';
-$input['user-name'] = isset($myArray["name"])? $myArray["name"] : '';
+if (isset($myArray["name"])) {
+    $name = explode(' ', $myArray["name"]);
+    $input['user-lastname'] = $name[0];
+    $input['user-firstname'] = $name[1];
+} else {
+    $input['user-lastname'] = '';
+    $input['user-firstname'] = '';
+}
 
 if($input['act'] == "check"){
   header('Location: ./edit.php');
@@ -182,18 +189,20 @@ function h($s) {
       </div>
 
       <div class="form-controller name">
-          <label>
-          お名前(本名 ※ニックネーム不可)
-          <span class="tag tag-danger">必須</span>
-          </label>
-          <div class="row row-gutter-xs">
-          <div class="">
-              <div class="form-group has-feedback user-name">
-              <input type="text" name="user-name" id="user-name" value="<?= h($input['user-name']) ?>"  placeholder="山田太郎" class="form-control form-control-success form-control-danger">
-              <p class="text-danger error">入力してください</p>
-              </div>
+        <label>
+        お名前(本名 ※ニックネーム不可)
+        <span class="tag tag-danger">必須</span>
+        </label>
+        <div class="user-name">
+          <div class="form-group has-feedback user-lastname">
+            <input type="text" name="user-lastname" id="user-lastname" value="<?= h($input['user-lastname']) ?>"  placeholder="山田" class="form-control form-control-success form-control-danger">
+            <p class="text-danger error">入力してください</p>
           </div>
+          <div class="form-group has-feedback user-firstname">
+            <input type="text" name="user-firstname" id="user-firstname" value="<?= h($input['user-firstname']) ?>"  placeholder="太郎" class="form-control form-control-success form-control-danger">
+            <p class="text-danger error">入力してください</p>
           </div>
+        </div>
       </div>
 
       <div class="form-controller contact">

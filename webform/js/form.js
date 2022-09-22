@@ -3,7 +3,8 @@
 $(function () {
   var list = [
     "genre",
-    "user-name",
+    "user-lastname",
+    "user-firstname",
     "contact",
     "remarks",
     "number-of-child",
@@ -15,8 +16,11 @@ $(function () {
   var checked_flg = "";
   $.getJSON('./config.json', (data) => {
     showloading();
-    if (getValue("#user-name") == "" && $.cookie('GAS_Reserve_GoogleCal_WebForm_UserName')){
-      $("#user-name").val($.cookie('GAS_Reserve_GoogleCal_WebForm_UserName'));
+    if (getValue("#user-lastname") == "" && $.cookie('GAS_Reserve_GoogleCal_WebForm_UserLastName')){
+      $("#user-lastname").val($.cookie('GAS_Reserve_GoogleCal_WebForm_UserLastName'));
+    }
+    if (getValue("#user-firstname") == "" && $.cookie('GAS_Reserve_GoogleCal_WebForm_UserFirstName')){
+      $("#user-firstname").val($.cookie('GAS_Reserve_GoogleCal_WebForm_UserFirstName'));
     }
     if (getValue("#contact") == "" && $.cookie('GAS_Reserve_GoogleCal_WebForm_Contact')){
       $("#contact").val($.cookie('GAS_Reserve_GoogleCal_WebForm_Contact'));
@@ -37,8 +41,12 @@ $(function () {
             liff.getProfile()
               .then(async profile => {
                 if (getValue("#contact") == "") {
-                  $("#user-name").val(profile.displayName);
-                  v.userName();
+                  if (profile.displayName) {
+                    var dn = profile.displayName.split(' ');
+                    $("#user-lastname").val(dn[0]);
+                    $("#user-firstname").val(dn[1]);
+                    v.userName();
+                  }
                 }
                 $("#line_id").val(profile.userId);
                 var line_id = $("#line_id").val();
@@ -55,9 +63,16 @@ $(function () {
                       }
                     }).then(function (json) {
                       if (json['member_lastname']) {
-                        $("#user-name").val(
-                          `${json['member_lastname']}${json['member_firstname']}`.replaceAll('@', ''));
-                        v.userName();
+                        var isSet = true;
+                        if (~json['member_lastname'].indexOf('@')
+                            || ~json['member_firstname'].indexOf('@')) {
+                          isSet = false;
+                        }
+                        if (isSet) {
+                          $("#user-lastname").val(json['member_lastname']);
+                          $("#user-firstname").val(json['member_firstname']);
+                          v.userName();
+                        }
                       }
                       if (json['member_tel']) {
                         $("#contact").val(json['member_tel']);
@@ -100,7 +115,10 @@ $(function () {
     });
 
     // user name
-    onKeyup("#user-name", function () {
+    onKeyup("#user-lastname", function () {
+      v.userName();
+    });
+    onKeyup("#user-firstname", function () {
       v.userName();
     });
 
@@ -335,7 +353,8 @@ $(function () {
           $('.submit-error-message').show();
           $("input[type='submit']").prop('disabled', false);
         } else { // submit
-          $.cookie('GAS_Reserve_GoogleCal_WebForm_UserName', getValue("#user-name"), { expires: 365 });
+          $.cookie('GAS_Reserve_GoogleCal_WebForm_UserLastName', getValue("#user-lastname"), { expires: 365 });
+          $.cookie('GAS_Reserve_GoogleCal_WebForm_UserFirstName', getValue("#user-firstname"), { expires: 365 });
           $.cookie('GAS_Reserve_GoogleCal_WebForm_Contact', getValue("#contact"), { expires: 365 });
           $('form').submit();
         }
@@ -343,7 +362,8 @@ $(function () {
 
       static validateAll() {
         list.includes('genre') ? this.genre() : '';
-        list.includes('user-name') ? this.userName() : '';
+        list.includes('user-lastname') ? this.userName() : '';
+        list.includes('user-firstname') ? this.userName() : '';
         list.includes('contact') ? this.contact() : '';
         list.includes('remarks') ? this.remarks() : '';
         list.includes('number-of-child') ? this.numberOf() : '';
@@ -370,8 +390,8 @@ $(function () {
       }
       //user name
       static userName() {
-        var value = getValue("#user-name");
-        validate(m.isRequired(value), $fg.filter(".user-name"));
+        validate(m.isRequired(getValue("#user-lastname")), $fg.filter(".user-lastname"));
+        validate(m.isRequired(getValue("#user-firstname")), $fg.filter(".user-firstname"));
       }
 
       //remarks
