@@ -169,7 +169,7 @@ function h($s) {
       </div>
       <div class="form-controller number-of-under2">
         <label>
-          うち2歳未満(0~1歳)のお子様の人数
+          うち1歳未満(0歳)のお子様の人数
           <span class="tag tag-danger">必須</span>
         </label>
         <div class="form-group number-of-under2">

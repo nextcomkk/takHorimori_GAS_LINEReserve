@@ -28,7 +28,7 @@ try {
     [line_id]：{$line_id}
     [radio]：{$genre}
     [子供]：{$number_of_child}
-    [2歳以下]：{$number_of_under2}
+    [1歳以下]：{$number_of_under2}
     [保護者]：{$number_of_guardian}
     [名前]：{$user_name}
     [日程選択]：{$radio_date}

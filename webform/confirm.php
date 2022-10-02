@@ -103,7 +103,7 @@ function h($s) {
       </div>
       <div class="form-controller">
         <label>
-          <b>うち2歳未満の人数:</b>
+          <b>うち1歳未満の人数:</b>
         </label>
         <div class="form-group con-div">
             <?= h($number_of_under2) ?>
